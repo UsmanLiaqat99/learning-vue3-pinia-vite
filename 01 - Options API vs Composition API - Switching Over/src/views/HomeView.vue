@@ -9,6 +9,31 @@
 </template>
 
 <!-- Composition APi -->
+<!-- way 1 -->
+<!-- <script>
+import { ref } from 'vue'
+export default {
+  setup() {
+    const counter = ref(0)
+
+    const increaseCounter = () => {
+      counter.value++
+    }
+
+    const decreaseCounter = () => {
+      if (counter.value > 0) {
+        counter.value--
+      }
+    }
+
+    return {
+      counter, increaseCounter, decreaseCounter
+    }
+  }
+}
+</script> -->
+
+<!-- way 2 -->
 <script setup>
 import { ref } from 'vue';
 
@@ -24,6 +49,7 @@ const decreaseCounter = () => {
   }
 }
 </script>
+
 
 <!-- Option Api -->
 <!-- <script>
