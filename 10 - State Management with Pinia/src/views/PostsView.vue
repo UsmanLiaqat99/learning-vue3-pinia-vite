@@ -11,9 +11,10 @@
     <input type="text" v-focus>
 
     <div>
-      <button :class="{ 'yellow': oddOrEven === 'odd' }" class="counter-button" @click="increaseCounter(1)">{{
-          counterData.count
-      }}</button>
+      <button :class="{ 'yellow': counter.oddOrEven === 'odd' }" class="counter-button"
+        @click="counter.increaseCounter(1)">{{
+    counter.count
+        }}</button>
     </div>
   </div>
 </template>
@@ -21,7 +22,9 @@
 <script setup>
 import { vFocus } from '../directives/vAutoFocus'
 import { ref } from 'vue'
-import { useCounter } from '../use/useCounter';
+import { useCounterStore } from '../stores/counter'
+
+const counter = useCounterStore()
 
 const posts = ([
   {
@@ -37,8 +40,6 @@ const posts = ([
     title: 'Post 3'
   }
 ])
-
-const { counterData, increaseCounter, oddOrEven } = useCounter()
 
 </script>
 
