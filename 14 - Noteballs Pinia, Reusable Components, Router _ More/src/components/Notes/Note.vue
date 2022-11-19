@@ -12,12 +12,21 @@
     </div>
     <footer class="card-footer">
       <a href="#" class="card-footer-item">Edit</a>
-      <a href="#" class="card-footer-item" @click="handleDeleteClick">Delete</a>
+      <a
+        href="#"
+        class="card-footer-item"
+        @click="storeNotes.deleteNote(note.id)"
+        >Delete</a
+      >
     </footer>
   </div>
 </template>
 
 <script setup>
+import { useStoreNotes } from "../../stores/storeNotes";
+
+const storeNotes = useStoreNotes();
+
 // Props
 const props = defineProps({
   note: {
@@ -25,12 +34,4 @@ const props = defineProps({
     required: true,
   },
 });
-
-// Emits
-const emit = defineEmits(["deleteClicked"]);
-
-// Handle Delete Click
-const handleDeleteClick = () => {
-  emit("deleteClicked", props.note.id);
-};
 </script>
