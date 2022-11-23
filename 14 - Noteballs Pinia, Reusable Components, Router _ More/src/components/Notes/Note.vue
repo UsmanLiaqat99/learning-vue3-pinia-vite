@@ -1,37 +1,67 @@
 <template>
-  <div class="card mb-4">
+  <div
+    class="card mb-4"
+  >
     <div class="card-content">
-      {{ note.content }}
-      <div class="has-text-right has-text-grey-light mt-2">
-        <small>{{
-          note.content.length > 1
-            ? note.content.length + " characters"
-            : note.content.length + " character"
-        }}</small>
+      <div class="content">
+        {{ note.content }}
+        <div class="has-text-right has-text-grey-light mt-2">
+          <small>{{ characterLength }}</small>
+        </div>
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item">Edit</a>
-      <a
-        href="#"
+      <RouterLink
+        :to="`/editNote/${ note.id }`"
         class="card-footer-item"
-        @click="storeNotes.deleteNote(note.id)"
-        >Delete</a
+        href="#"
       >
+        Edit
+      </RouterLink>
+      <a
+        @click.prevent="storeNotes.deleteNote(note.id)"
+        class="card-footer-item"
+        href="#"
+      >
+        Delete
+      </a>
     </footer>
   </div>
 </template>
 
 <script setup>
-import { useStoreNotes } from "../../stores/storeNotes";
+/*
+  imports
+*/
 
-const storeNotes = useStoreNotes();
+  import { computed } from 'vue'
+  import { useStoreNotes } from '@/stores/storeNotes'
 
-// Props
-const props = defineProps({
-  note: {
-    type: Object,
-    required: true,
-  },
-});
+/*
+  props
+*/
+
+  const props = defineProps({
+    note: {
+      type: Object,
+      required: true
+    }
+  })
+
+/*
+  store
+*/
+
+  const storeNotes = useStoreNotes()
+
+/*
+  character length
+*/
+
+  const characterLength = computed(() => {
+    let length = props.note.content.length
+    let description = length > 1 ? 'characters' : 'character'
+    return `${ length } ${ description }`
+  })
+
 </script>
